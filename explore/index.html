@@ -14,11 +14,21 @@
     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
   </head>
   <body>
+    <header>
+      <ul>
+        <li v-for="link in links">{{link}}</li>
+      </ul>
+    </header>
     <div class="container" id="content">
       <h2>{{title}}</h2>
       <p>{{content}}</p>
     </div>
     <script>
+      Vue.createApp({
+        data(){
+          return {links: ["options1", "option2", "option3", "option4"]}
+        }
+      }).mount("header")
       Vue.createApp({
         data() {
           return { title: "page title", content: "page content" };
