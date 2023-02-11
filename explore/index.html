@@ -16,30 +16,40 @@
   <body>
     <header>
       <ul>
-        <li v-for="link in links">
-          <a v-bind:href="link.url">{{link.text}}</a>
+        <li v-for="(page, index) in pages" :key="index">
+          <a  @click.prevent="activePage = index" v-bind:href="page.link.url">{{page.link.text}}</a>
         </li>
       </ul>
     </header>
     <div class="container" id="content">
-      <h2>{{title}}</h2>
-      <p>{{content}}</p>
+      <h2>{{pages[activePage].title}}</h2>
+      <p>{{pages[activePage].content}}</p>
     </div>
     <script>
       Vue.createApp({
-        data(){
-          return {links: [
-            {text: "Home", url: "home.html"},
-            {text: "Servce", url: "service.html"},
-            {text: "Pages", url: "pages.html"},
-          ]}
-        }
-      }).mount("header")
-      Vue.createApp({
         data() {
-          return { title: "page title", content: "page content" };
+          return {
+            activePage: 0,
+            pages: [
+              {
+                link: { text: "Home", url: "home.html" },
+                title: "Home title",
+                content: "Home content",
+              },
+              {
+                link: { text: "About", url: "about.html" },
+                title: "About title",
+                content: "About content",
+              },
+              {
+                link: { text: "Contact", url: "contact.html" },
+                title: "Contact title",
+                content: "Contact content",
+              },
+            ],
+          };
         },
-      }).mount("#content");
+      }).mount("body");
     </script>
   </body>
 </html>
